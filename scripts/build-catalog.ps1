@@ -8,27 +8,35 @@ $skillsRoot = Join-Path $repoRoot "skills"
 
 $entries = @()
 
-Get-ChildItem -Directory -Path $skillsRoot | ForEach-Object {
-    $skillFile = Join-Path $_.FullName "SKILL.md"
-    if (-not (Test-Path $skillFile)) { return }
+# Walk the tree like OpenCode does: intermediate directories may nest deeper
+# skills, and a directory containing SKILL.md is a leaf (do not search inside).
+$queue = New-Object System.Collections.Queue
+$queue.Enqueue($skillsRoot)
+while ($queue.Count -gt 0) {
+    $dir = $queue.Dequeue()
+    $skillFile = Join-Path $dir "SKILL.md"
+    if (Test-Path $skillFile) {
+        $skillDir = $dir
+        $skillName = Split-Path -Leaf $dir
+        $files = @()
+        Get-ChildItem -Recurse -File -Path $skillDir | ForEach-Object {
+            # Catalog paths are relative to the skill directory:
+            # OpenCode downloads them from <base-url>/<name>/<file>.
+            $rel = $_.FullName.Substring($skillDir.Length).TrimStart('\', '/').Replace('\', '/')
+            if ($rel -ne "index.json") { $files += $rel }
+        }
 
-    $files = @()
-    $skillDir = Join-Path $skillsRoot $_.Name
-    Get-ChildItem -Recurse -File -Path $_.FullName | ForEach-Object {
-        # Catalog paths are relative to the skill directory:
-        # OpenCode downloads them from <base-url>/<name>/<file>.
-        $rel = $_.FullName.Substring($skillDir.Length).TrimStart('\', '/').Replace('\', '/')
-        if ($rel -ne "index.json") { $files += $rel }
-    }
+        if ($files -notcontains "SKILL.md") {
+            throw "Skill '$skillName' has no SKILL.md."
+        }
 
-    if ($files -notcontains "SKILL.md") {
-        throw "Skill '$($_.Name)' has no SKILL.md."
-    }
-
-    $entries += [ordered]@{
-        name    = $_.Name
-        version = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds().ToString()
-        files   = $files
+        $entries += [ordered]@{
+            name    = $skillName
+            version = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds().ToString()
+            files   = $files
+        }
+    } else {
+        Get-ChildItem -Directory -Path $dir | ForEach-Object { $queue.Enqueue($_.FullName) }
     }
 }
 

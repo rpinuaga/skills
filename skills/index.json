@@ -2,7 +2,77 @@
   "skills": [
     {
       "name": "skill-factory",
-      "version": "1793620906",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "cloud-blackbox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "cloud-whitebox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "saas-blackbox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "saas-whitebox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "dns-blackbox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "dns-whitebox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "email-blackbox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "email-whitebox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "ip-blackbox",
+      "version": "1793621924",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "ip-whitebox",
+      "version": "1793621924",
       "files": [
         "SKILL.md"
       ]

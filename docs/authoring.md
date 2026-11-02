@@ -13,9 +13,9 @@ commands it may run.
 ## 1. Where things live
 
 ```text
-skills/                 ← the shared library. Everything reusable goes here.
+skills/                 ← the shared library as a TREE (see rules below)
   index.json            ← HTTP catalog manifest (auto-generated, do not edit by hand)
-  <skill-id>/           ← one directory per skill, ID-local and self-contained
+  <group>/…/<leaf>/     ← leaf directory = one skill, self-contained
     SKILL.md            ← the playbook (frontmatter + body)
     scripts/            ← runnable helpers the skill invokes
     references/         ← deeper material the skill reads on demand
@@ -26,15 +26,34 @@ docs/                   ← this guide and other long-form material
 
 Rules of thumb:
 
-- **One skill, one directory.** The skill ID is the directory name (lowercase
-  kebab-case, `^[a-z0-9]+(-[a-z0-9]+)*$`). It is case-sensitive and is what you
-  reference with `@skill-id` — the frontmatter `name` is only a display label.
-- **`skills/` must stay clean.** OpenCode scans that root, so nothing else
-  belongs there (`_draft/` scratch folders are the exception; they are ignored
-  only if you keep drafts out of `SKILL.md` siblings).
+- **The library is a tree of asset classes and variants.** Organization is
+  hierarchical: top-level grouping by practice area, then sub-groups, then
+  leaf skills. Look at the existing tree in the root `README.md` before
+  adding: extend it; don't invent a parallel structure.
+- **Only leaf directories contain `SKILL.md`.** A directory with `SKILL.md`
+  makes OpenCode stop searching *inside* it, so intermediate/group nodes hold
+  human navigation (`README.md`) only. Depth limit: keep leaves ≤ 5
+  directories below `skills/` (OpenCode searches up to six).
+- **One skill, one leaf directory.** The skill ID is the leaf directory name —
+  lowercase kebab-case, `^[a-z0-9]+(-[a-z0-9]+)*$`, unique across the whole
+  tree (IDs are what the agent references; the frontmatter `name` is only a
+  display label). Variant pattern: sibling leaves like `x-blackbox` /
+  `x-whitebox` under a common group.
+- **Genericity.** Skills are written for security work generally (consulting
+  and authorized testing alike), never for a specific engagement:
+  no client, program, or target names; CLI examples use `example.com` /
+  `ORG-XXXX-RIPE` style placeholders; no program-specific headers, hosts, or
+  naming conventions. Techniques must be ones the maintainer has actually
+  used and verified in practice — reference methodology material for the
+  *shape* (phases, loops, asset classes), never as a technique source.
+- **`skills/` must stay clean.** OpenCode scans that root: root-level `*.md`
+  files become flat skills, so nothing else belongs there. Hidden/scratch
+  files are ignored; drafts live under `skills/<leaf>/_draft/` or outside the
+  tree.
 - **Everything a skill needs ships inside its directory.** Supporting files are
-  discovered relative to `SKILL.md`. Do not have skills depend on paths in
-  another repo unless the other repo is a documented edge case (see §5).
+  resolved relative to `SKILL.md`. Reference sibling skills by ID (`@skill-id`).
+- **Learners of methodology read `README.md`**; agents read skills. Keep the
+  root README tree in sync when adding skills (descriptions: one line each).
 
 ## 2. Frontmatter
 
