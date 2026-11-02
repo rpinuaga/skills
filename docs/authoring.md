@@ -104,6 +104,10 @@ Guidelines:
   reconstructing long command chains correctly.
 - Word scripts/commands for Windows + PowerShell unless the skill is explicitly
   about Linux targets, since that is your primary environment.
+- Every technique carried in a skill is field-tested and marked as such by its
+  confident wording; anything plausible-but-unverified is written as
+  "candidate technique; verify in the field before relying on it". Update the
+  wording when real testing settles it.
 
 ## 4. From raw material to skill — recommended conversion flow
 
@@ -192,3 +196,30 @@ catalog:
 
 CI regenerates the catalog on every push that touches `skills/`, so if you
 forget, the push itself will finish the job.
+
+## 8. The improvement loop — real testing feeds the library
+
+The purpose of this repo is to accumulate **field-tested knowledge** and break
+the cycle where hard-won experience dies inside reports, scratch notes, or
+session logs. Make the round trip the default behavior:
+
+1. **Capture in-session.** When real testing verifies, refutes, or extends
+   something the skills taught, invoke `@skill-improve` in the same session
+   (or as the session's wrap-up step) with the observation.
+2. **Classify, don't copy.** `skill-improve` labels each item as tested /
+   candidate / correction, applies the genericity and redaction checklist,
+   and lands the change in the skill that owns the subject — one home, no
+   duplicate copies across sibling skills.
+3. **Corrections outrank additions.** When field results contradict an
+   existing step, rewrite that step; the field-tested truth replaces the
+   prior wording, and the commit message records the refutation.
+4. **Propagate worthiness checks.** Unverified ideas enter the library only
+   as candidates marked for first-verified confirmation — the next engagement
+   that exercises them should explicitly report back via this loop.
+5. **Grow the tree, not the leaves.** A repeated stream of new knowledge that
+   doesn't fit any existing leaf signals a new skill (`@skill-factory`), not
+   a bloated one; keep every leaf under the ~150-line guidance.
+
+Agents working *with* the user on security tasks should treat this loop as a
+closing step of any session that produced verified knowledge — ask the user
+whether to record it before wrapping up.

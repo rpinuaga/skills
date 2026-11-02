@@ -20,6 +20,8 @@ tested, verified practice — never copied methodology decks.
 
 ```text
 skills/
+├── skill-factory                     create new skills from notes/tools/knowledge
+├── skill-improve                     capture real-testing results into the tree
 └── attack-surface/                    … mapping what an organization exposes
     ├── internet/                      … directly internet-facing surface
     │   ├── ip/
@@ -45,8 +47,10 @@ credentials). Every discovery skill follows the same shape: enumerate →
 verify live → fingerprint/classify → hand off to sibling skills ("feed the
 loop") → iterate until two passes bring nothing new.
 
-Invoke by ID: `@ip-blackbox`, `@dns-whitebox`, `@skill-factory` for creating
-more, etc. — every ID above works directly.
+The library grows only from field verification: when real testing verifies,
+refutes, or extends what a skill says, `@skill-improve` records it into that
+skill (tested / candidate / correction labeling) — see
+[docs/authoring.md §8](docs/authoring.md#8-the-improvement-loop--real-testing-feeds-the-library).
 
 ## Layout
 

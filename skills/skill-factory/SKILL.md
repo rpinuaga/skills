@@ -9,8 +9,10 @@ description: >-
 ## Purpose
 
 Turn raw material (a note, a tool, a repeated workflow, a checklist) into a
-new skill under `skills/`, following this repo's conventions. The full
-conventions live in `../../docs/authoring.md` — read it before writing the skill.
+new skill under `skills/`, following this repo's conventions. If the material
+is instead a field observation to record against skills that already exist,
+that is an update — route it through `@skill-improve`. The full conventions
+live in `../../docs/authoring.md` — read it before writing the skill.
 
 ## Inputs
 
