@@ -13,6 +13,13 @@ With tenant/IdP visibility, turn "what SaaS might they use" into a verified
 tenant map: what is connected, with which identity, at what data scope — and
 what connects *around* the controls.
 
+**Provider-maturity rule.** White-box depth here depends entirely on the
+vendor's own admin/API surface. Modern SaaS with admin APIs and SSO
+integration supports real enumeration; classic enterprise suites (ERP/CRM
+platforms and similar) often expose almost nothing tenant-side for
+discovery — those are usually approached black-box (`@saas-blackbox`) with
+this skill as auxiliary. Decide per vendor before planning the enumeration.
+
 ## Inputs
 
 Ask for: IdP (SSO) admin visibility or app-inventory export, tenant admin

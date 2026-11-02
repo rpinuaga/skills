@@ -26,10 +26,18 @@ docs/                   ← this guide and other long-form material
 
 Rules of thumb:
 
-- **The library is a tree of asset classes and variants.** Organization is
-  hierarchical: top-level grouping by practice area, then sub-groups, then
-  leaf skills. Look at the existing tree in the root `README.md` before
-  adding: extend it; don't invent a parallel structure.
+- **The library is a tree of practice areas, then a per-practice key.**
+  Look at the existing tree in the root `README.md` before adding; extend it;
+  don't invent a parallel structure. Within a practice area, choose the
+  organizing key that matches how the work actually differs:
+  - **black-box style skills** (external-only) split by *asset class* —
+    the underlying target technology rarely changes the technique;
+  - **white-box style skills** (privileged access) split by *technology* —
+    each cloud/directory/platform stack enumerates exposure differently
+    (e.g. `aws-whitebox` vs `azure-whitebox` vs `gcp-whitebox`);
+  - where a vendor's white-box discovery surface is thin (classic enterprise
+    suites), the black-box sibling is the default route; note that in the
+    white-box skill, not as a duplicate skill.
 - **Only leaf directories contain `SKILL.md`.** A directory with `SKILL.md`
   makes OpenCode stop searching *inside* it, so intermediate/group nodes hold
   human navigation (`README.md`) only. Depth limit: keep leaves ≤ 5
@@ -37,8 +45,9 @@ Rules of thumb:
 - **One skill, one leaf directory.** The skill ID is the leaf directory name —
   lowercase kebab-case, `^[a-z0-9]+(-[a-z0-9]+)*$`, unique across the whole
   tree (IDs are what the agent references; the frontmatter `name` is only a
-  display label). Variant pattern: sibling leaves like `x-blackbox` /
-  `x-whitebox` under a common group.
+  display label). Name leaves `<subject>` plus a qualifier when two halves
+  need the same subject externally (e.g. `dns-blackbox` under a black-box
+  branch, `aws-whitebox` under a technology split).
 - **Genericity.** Skills are written for security work generally (consulting
   and authorized testing alike), never for a specific engagement:
   no client, program, or target names; CLI examples use `example.com` /

@@ -45,9 +45,9 @@ diagrams, firewall/CDN rule base. Work read-only by default.
    reconciliation findings, each with a recommendation.
 6. **Feed the loop.** Undeclared-but-live assets found in reconciliation feed
    the discovery skills for deeper mapping (`@ip-blackbox` probing,
-   `@dns-blackbox` for their names, `@cloud-whitebox` scoping for their
-   accounts) — the internal register and the external probe loop converge
-   until they agree.
+   `@dns-blackbox` for their names, `@aws-whitebox`/`@azure-whitebox`/
+   `@gcp-whitebox` scoping for their accounts) — the internal register and
+   the external probe loop converge until they agree.
 
 ## Output format
 

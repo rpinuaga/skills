@@ -31,8 +31,9 @@ Ask the user for what is missing:
 2. Analyze the material and classify it per the table in §4 (workflow skill,
    tool skill, note split, checklist reference).
 3. Propose to the user, before creating files:
-   - the tree placement (which group; black-box/white-box variant if the
-     existing tree defines such pairs — reuse sibling IDs' shaping),
+   - the tree placement (which branch and leaf; pick the organizing key of
+     that branch — asset class for external-only skills, technology for
+     privileged-access skills),
    - the skill ID and one-line trigger description,
    - the skill shape (what goes in the body vs `references/` vs `scripts/`),
    - any generalizations/redactions made to sensitive material.

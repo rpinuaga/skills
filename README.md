@@ -22,23 +22,21 @@ tested, verified practice — never copied methodology decks.
 skills/
 ├── skill-factory                     create new skills from notes/tools/knowledge
 ├── skill-improve                     capture real-testing results into the tree
-└── attack-surface/                    … mapping what an organization exposes
-    ├── internet/                      … directly internet-facing surface
-    │   ├── ip/
-    │   │   ├── ip-blackbox            IP space, ASNs, ports, vhost/origin probing
-    │   │   └── ip-whitebox            IP registers reconciled via console access
-    │   ├── dns/
-    │   │   ├── dns-blackbox           CT logs, passive sources, naming-convention mining
-    │   │   └── dns-whitebox           Zone exports vs. reality reconciliation
-    │   └── email/
-    │       ├── email-blackbox         SPF/DMARC/DKIM, MX, senders, lookalikes
-    │       └── email-whitebox         Gateway/tenant-side sender reconciliation
-    ├── cloud/
-    │   ├── cloud-blackbox             Storage/gateway/CDN fingerprinting, artifact mining
-    │   └── cloud-whitebox             Account enumeration, exposure matrix, env parity
-    └── saas/
-        ├── saas-blackbox              Third-party vendors, aliases, impersonation
-        └── saas-whitebox              IdP/tenant inventory, grants, shadow SaaS
+└── attack-surface/                   … mapping what an organization exposes
+    ├── blackbox/                     external-only; split by asset class
+    │   ├── ip-blackbox               IP space, ASNs, ports, vhost/origin probing
+    │   ├── dns-blackbox              CT logs, passive sources, naming-convention mining
+    │   ├── email-blackbox            SPF/DMARC/DKIM, MX, senders, lookalikes
+    │   ├── cloud-blackbox            Storage/gateway/CDN fingerprinting, artifact mining
+    │   └── saas-blackbox             Third-party vendors, aliases, impersonation
+    └── whitebox/                     privileged access; split by technology
+        ├── aws-whitebox              Accounts, buckets/gateways/function URLs, snapshots
+        ├── azure-whitebox            Subscriptions, public IPs/NSGs, App Service, storage rules
+        ├── gcp-whitebox              Org/projects, allUsers bindings, forwarding rules, SQL
+        ├── ip-whitebox               IP registers reconciled via console access
+        ├── dns-whitebox              Zone exports vs. reality reconciliation
+        ├── email-whitebox            Gateway/tenant-side sender reconciliation
+        └── saas-whitebox             IdP/tenant sourcing; provider-maturity fallback to blackbox
 ```
 
 How variants relate: **black-box** = external-only perspective (public data +
