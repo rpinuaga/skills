@@ -1,0 +1,8 @@
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.swp
+
+# Local scratch work (drafts, redaction staging, etc.)
+skills/*/_draft/
+*.local.md

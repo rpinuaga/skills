@@ -1,0 +1,33 @@
+name: catalog
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "scripts/build-catalog.ps1"
+      - ".github/workflows/catalog.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate skills/index.json
+        shell: pwsh
+        run: ./scripts/build-catalog.ps1
+
+      - name: Commit updated catalog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add skills/index.json
+          if git diff --cached --quiet; then
+            echo "index.json unchanged"
+          else
+            git commit -m "ci: refresh skills catalog [skip ci]"
+            git push
+          fi
